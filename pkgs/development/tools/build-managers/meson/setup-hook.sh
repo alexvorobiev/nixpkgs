@@ -5,6 +5,15 @@ mesonConfigurePhase() {
         mesonFlags="--prefix=$prefix $mesonFlags"
     fi
 
+    # See multiple-outputs.sh and meson’s coredata.py
+    mesonFlags="\
+        --libdir=${!outputLib}/lib --libexecdir=${!outputLib}/libexec \
+        --bindir=${!outputBin}/bin --sbindir=${!outputBin}/sbin \
+        --includedir=${!outputInclude}/include \
+        --mandir=${!outputMan}/share/man --infodir=${!outputInfo}/share/info \
+        --localedir=${!outputLib}/share/locale \
+        $mesonFlags"
+
     # Build release by default.
     mesonFlags="--buildtype=${mesonBuildType:-release} $mesonFlags"
 
