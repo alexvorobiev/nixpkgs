@@ -6,11 +6,11 @@
 
 stdenv.mkDerivation rec {
   name = "gnome-online-accounts-${version}";
-  version = "3.26.2";
+  version = "3.27.92";
 
   src = fetchurl {
     url = "mirror://gnome/sources/gnome-online-accounts/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "49f8760d86fe33057eaeeb4f1667bc7f6163e428591e7aed9575563be10b17d1";
+    sha256 = "0qxjwwjb1h90g4mgy3z1fz2nwvh709y9533fsxs7nmsm8501kw6s";
   };
 
   passthru = {

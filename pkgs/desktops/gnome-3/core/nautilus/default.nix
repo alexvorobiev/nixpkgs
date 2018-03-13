@@ -4,11 +4,11 @@
 
 stdenv.mkDerivation rec {
   name = "nautilus-${version}";
-  version = "3.26.2";
+  version = "3.28.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/nautilus/${gnome3.versionBranch version}/${name}.tar.xz";
-    sha256 = "79c99404c665ea76b3db86f261fbd28a62b54c51429b05c3314462c9de2614b4";
+    sha256 = "087n7gjwaq3qvggs350m2bb7v4mdrd6n5cjw7rar5mq354ska05n";
   };
 
   passthru = {
