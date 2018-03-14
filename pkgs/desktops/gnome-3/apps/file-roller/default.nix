@@ -1,5 +1,5 @@
-{ stdenv, fetchurl, glib, pkgconfig, gnome3, intltool, itstool, libxml2, libarchive
-, attr, bzip2, acl, wrapGAppsHook, librsvg, gdk_pixbuf, libnotify, nautilus }:
+{ stdenv, fetchurl, glib, gtk, meson, ninja, pkgconfig, gnome3, gettext, libxml2, libarchive
+, wrapGAppsHook, libnotify, nautilus }:
 
 stdenv.mkDerivation rec {
   name = "file-roller-${version}";
@@ -10,17 +10,18 @@ stdenv.mkDerivation rec {
     sha256 = "15pn2m80x45bzibig4zrqybnbr0n1f9wpqx7f2p6difldns3jwf1";
   };
 
-  passthru = {
-    updateScript = gnome3.updateScript { packageName = "file-roller"; attrPath = "gnome3.file-roller"; };
-  };
+  nativeBuildInputs = [ meson ninja gettext pkgconfig libxml2 wrapGAppsHook ];
 
-  nativeBuildInputs = [ pkgconfig wrapGAppsHook ];
-
-  buildInputs = [ glib gnome3.gtk intltool itstool libxml2 libarchive
-                  gnome3.defaultIconTheme attr bzip2 acl gdk_pixbuf librsvg
-                  gnome3.dconf libnotify nautilus ];
+  buildInputs = [ glib libarchive gnome3.defaultIconTheme libnotify nautilus ];
 
   installFlags = [ "nautilus_extensiondir=$(out)/lib/nautilus/extensions-3.0" ];
+
+  passthru = {
+    updateScript = gnome3.updateScript {
+      packageName = "file-roller";
+      attrPath = "gnome3.file-roller";
+    };
+  };
 
   meta = with stdenv.lib; {
     homepage = https://wiki.gnome.org/Apps/FileRoller;
